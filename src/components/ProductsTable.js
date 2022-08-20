@@ -1,38 +1,52 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import Product from './Product'
 import ProductsCathegories from './ProductsCathegories'
 
 export default function ProductsTable({products}) {
 
-        let productsList =products
-        let cathegories =[];
+    const produits = [...products]
 
-        products.forEach(product => {
-            [...cathegories,product.cathegory]
-        });
+     const allCathegories =(produits).map((produit)=>produit.category)
+     const cathegories=[...new Set(allCathegories)]
+    
+    
+   
+    
+    console.log(cathegories)
 
-    return (
-      <div className='row'>
-          <div className='col-md-8'>
-          <table className='table table-bordered'>
-
-                <thead>
-                    <tr>
-                        <th scope="col" >products</th>
-                        <th scope="col" >prix</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                <ProductsCathegories/>
-                <Product/>
-                </tbody>
-
-            </table>              
-              
-          </div>
- 
-      </div>
+    const cathegoriesProduits = (cathegories).map((cathegorie)=>
+    <ProductsCathegories produits={produits} name ={cathegorie}/>
+    
     )
+
+      return (
+        <div className='row'>
+
+            <div className='col-md-8'>
+            <table className='table table-bordered'>
+                  <thead>
+                      <tr>
+                          <th scope="col" >Products</th>
+                          <th scope="col" >Prix</th>
+                      </tr>
+                  </thead>
+  
+                  <tbody>
+
+                    {cathegoriesProduits}
+                  </tbody>
+  
+              </table>              
+                
+            </div>
+            
+        </div>
+
+       
+      )
+ 
+            
+    
+
 
 }
