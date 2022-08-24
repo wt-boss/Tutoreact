@@ -3,7 +3,7 @@ import React from 'react'
 export default function ProducsItem({produit}) {
 
   const productClass = (produit.stocked==true)?'text-danger':'' 
-  console.log(productClass);
+  
 
   return (
     <>

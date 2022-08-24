@@ -3,7 +3,7 @@
 import React from 'react'
 import Product from './Product'
 
-export default function ProductsCathegories({name ,produits}) {
+export default function ProductsCathegories({name ,produits ,hideStoked}) {
 
   return (
     <>
@@ -12,7 +12,7 @@ export default function ProductsCathegories({name ,produits}) {
        {name}
     </th>
   </tr>
-  <Product produits={produits} name={name}/>
+  <Product hideStoked={hideStoked} produits={produits} name={name}/>
   </>
   )
 }

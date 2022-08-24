@@ -2,12 +2,7 @@
 import React from 'react'
 import ProducsItem from './ProducsItem';
 
-export default function product({produits , name}) {
-
-  const filterProduct = (nameCategory) => {
-    produits.filter ((nameCategory) => !nameCategory);
-    return true;
-  }
+export default function product({produits , name , hideStoked}) {
 
   const belongTo =(cathegoryName)=>{
       if(cathegoryName==name){
@@ -17,14 +12,25 @@ export default function product({produits , name}) {
         return false
       }
   }
+
+  const isStoked = ()=>{
+    if(hideStoked){
+
+    }
+  }
   const productList =(produits).map((produit , index)=> 
-   belongTo(produit.category) ? <ProducsItem produit ={produit}/> :null
+   (belongTo(produit.category)&& ((!hideStoked)||(hideStoked&&produit.stocked))) ? <ProducsItem  produit ={produit}/> :null 
+   
 
   )
+
+ 
 
 
   return (
     <>
+
+  
       {productList}
 
     </>  

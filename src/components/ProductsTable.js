@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react'
 import Product from './Product'
 import ProductsCathegories from './ProductsCathegories'
 
-export default function ProductsTable({products}) {
+export default function ProductsTable({products , hideStoked}) {
 
     const produits = [...products]
 
@@ -15,7 +15,7 @@ export default function ProductsTable({products}) {
     console.log(cathegories)
 
     const cathegoriesProduits = (cathegories).map((cathegorie)=>
-    <ProductsCathegories produits={produits} name ={cathegorie}/>
+    <ProductsCathegories hideStoked={hideStoked} produits={produits} name ={cathegorie}/>
     
     )
 
