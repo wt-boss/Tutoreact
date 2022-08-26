@@ -10,7 +10,8 @@ export default class AddStudents extends Component {
     name:'',
     course:'',
     email:'',
-    phone:''
+    phone:'',
+    errors:[]
   }
 
   handleInput= (e)=>{
@@ -24,7 +25,10 @@ export default class AddStudents extends Component {
   saveStudent = async (e)=>{
     e.preventDefault() ;
 
-    const res = await axios.post('http://localhost:300/demoLaravel/public/api/add-Student' , this.state)
+    const res = await axios.post('http://localhost:300/demoLaravel/public/api/add-Student' , {name:this.state.name,
+    course:this.state.course,
+    email:this.state.email,
+    phone:this.state.phone,})
     if(res.data.status===200){
      // console.log(res.data.message)
 
@@ -39,8 +43,16 @@ export default class AddStudents extends Component {
         name:'',
         course:'',
         email:'',
-        phone:''
+        phone:'',
+        errors:[]
       })
+    }
+    else{
+
+      this.setState({
+        errors:res.data.errors
+      })
+
     }
   }
 
@@ -65,19 +77,24 @@ export default class AddStudents extends Component {
                           <div className='form-group mb-3'>
                                 <label>Student NAme</label>
                                 <input typte='text' name='name' value={this.state.name} className='form-control' onChange={this.handleInput} ></input>
+                                <span className='text-danger erros'>{this.state.errors.name}</span>
                           </div>
                           <div className='form-group mb-3'>
                                 <label>Student Course</label>
                                 <input typte='text' name='course' value={this.state.course} className='form-control' onChange={this.handleInput} ></input>
+                                <span className='text-danger erros'>{this.state.errors.course}</span>
                           </div>
 
                           <div className='form-group mb-3'>
                                 <label>Student Email</label>
                                 <input typte='email' name='email' value={this.state.email} className='form-control' onChange={this.handleInput}  ></input>
+                                <span className='text-danger erros'>{this.state.errors.email}</span>
                           </div>
                           <div className='form-group mb-3'>
                                 <label>Student Phone</label>
-                                <input typte='text' name='phone' value={this.state.phone} className='form-control' onChange={this.handleInput} ></input>
+                                <input typte='tel' name='phone' value={this.state.phone} className='form-control' onChange={this.handleInput} ></input>
+                                <span className='text-danger erros'>{this.state.errors.phone}</span>
+                                
                           </div>
 
                           <button type='submit' className='btn btn-primary'>Save Student</button>

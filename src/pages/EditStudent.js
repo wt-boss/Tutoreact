@@ -5,12 +5,21 @@ import swal from 'sweetalert';
 
 export default function EditStudent() {
 
- 
+  const [errors , setErrors]=useState({
+    name:'',
+  course:'',
+    email:'' ,
+    phone:'',
+
+  })
 
   const [state , setState] =useState({name:'' ,
    course:'',
     email:'' ,
-    phone:'',})
+    phone:'',
+  })
+
+
 
     const params = useParams()
 
@@ -23,20 +32,21 @@ async function GetSudent(){
  
     const res =await axios.get('http://localhost:300/demoLaravel/public/api/add-Student/'+params.id )
     if(res.data.status===200){
-       var student = res.data.student
+       let student = res.data.student
 
        setState(student) 
     }
     else{
-      console.log('request is not available')
+
     }
     
 }
 
 
  const  handleInput= (e)=>{
-    setState({
-      [e.target.name]:e.target.value
+    setState(state=>{
+      return {...state ,[e.target.name]:e.target.value}
+      
     })
     
   }
@@ -44,7 +54,7 @@ async function GetSudent(){
 
   const updateStudent = async (e)=>{
     e.preventDefault() ;
-    document.getElementById('update').disabled=false;
+    document.getElementById('update').dibled=false;
     const res = await axios.put('http://localhost:300/demoLaravel/public/api/add-Student/'+params.id , state)
     if(res.data.status===200){
       swal({
@@ -55,12 +65,16 @@ async function GetSudent(){
       });
   
       setState(res.data.student)
+      setErrors({}) 
+    }
+    else{
+      setErrors(res.data.errors) 
     }
   }
 
     return (
       <>
-    
+
       <div className='container'>
           <div className='row'>
               <div className='col-md-12'>
@@ -78,19 +92,24 @@ async function GetSudent(){
                           <div className='form-group mb-3'>
                                 <label>Student NAme</label>
                                 <input typte='text' name='name' value={state.name} className='form-control' onChange={handleInput} ></input>
+                                <span className='text-danger erros'>{errors.name}</span>
+
                           </div>
                           <div className='form-group mb-3'>
                                 <label>Student Course</label>
                                 <input typte='text' name='course' value={state.course} className='form-control' onChange={handleInput} ></input>
+                                <span className='text-danger erros'>{errors.course}</span>
                           </div>
 
                           <div className='form-group mb-3'>
                                 <label>Student Email</label>
                                 <input typte='email' name='email' value={state.email} className='form-control' onChange={handleInput}  ></input>
+                                <span className='text-danger erros'>{errors.email}</span>
                           </div>
                           <div className='form-group mb-3'>
                                 <label>Student Phone</label>
                                 <input typte='text' name='phone' value={state.phone} className='form-control' onChange={handleInput} ></input>
+                                <span className='text-danger erros'>{errors.phone}</span>
                           </div>
 
                           <button id='update' type='submit' className='btn btn-primary'>Update Student</button>

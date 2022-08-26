@@ -37,5 +37,31 @@
   }
 }
 
+.erros{
+  font-size:12px;
+}
+
+.erros_input{
+  font-size:12px;
+}
+.btn-primary {
+  background-color: #3350cb !important;
+  border-radius: 0;
+}
+.btn-success{
+  background-color: #108f47;
+  border-radius: 2px;
+  color: #ffffff;
+}
+
+.btn-danger{
+  background-color: #ad1f1f;
+  border-radius: 2px
+
+}
+
+.card{
+  border-radius: 2px
+}
 
 

@@ -71,7 +71,7 @@ async componentDidMount(){
             <td>{item.email}</td>
             <td>{item.phone}</td>
             <td>
-              <Link to={"edit-student/"+item.id} className='btn btn-success'>Edit</Link>
+              <Link to={"edit-student/"+item.id} className='btn btn-success '>Edit</Link>
             </td>
             <td>
               <form className='d-inline' onSubmit={(e)=>this.delete(e,item.id)} ><button className='btn btn-danger'  >Delete</button></form>
@@ -101,7 +101,7 @@ async componentDidMount(){
                             </h4>
                         </div>
                         <div className='card-body'>
-                          <table className='table coltable-bordered table-striped'>
+                          <table className='table table-bordered table-striped'>
                             <thead>
                               <tr>
                                 <th>
