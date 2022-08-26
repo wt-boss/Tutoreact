@@ -8,6 +8,7 @@ import ProductsManager from './components/ProductsManager';
 */
 import Stundent from './pages/Stundent'; 
 import AddStudents from './pages/AddStudents';
+import EditStudent from './pages/EditStudent';
 
 
 export default function App({name , children}) {
@@ -41,6 +42,7 @@ export default function App({name , children}) {
           <Routes>
                 <Route  path='/' element={<Stundent/>}/>
                 <Route  path='/add-student' element={<AddStudents/>}/>
+                <Route  path='/edit-student/:id' element={<EditStudent/>}/>
           </Routes>
 
       

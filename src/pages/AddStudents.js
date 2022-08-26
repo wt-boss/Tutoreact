@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import swal from 'sweetalert';
 
 export default class AddStudents extends Component {
 
@@ -25,7 +26,14 @@ export default class AddStudents extends Component {
 
     const res = await axios.post('http://localhost:300/demoLaravel/public/api/add-Student' , this.state)
     if(res.data.status===200){
-      console.log(res.data.message)
+     // console.log(res.data.message)
+
+     swal({
+      title: "Success",
+      text: "Student Added sucessfully",
+      icon: "success",
+      button: "OK",
+    });
 
       this.setState({
         name:'',

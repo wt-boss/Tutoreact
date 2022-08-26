@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import swal from 'sweetalert';
 
 export default class Stundent extends Component {
 
@@ -25,6 +26,28 @@ async componentDidMount(){
 
 }
 
+ async delete (e , id){
+    e.preventDefault();
+    const res =await axios.delete('http://localhost:300/demoLaravel/public/api/add-Student/'+id)
+    console.log(res.data.message)
+
+    const res2 = await axios.get('http://localhost:300/demoLaravel/public/api/add-Student');
+    console.log(res2)
+
+    if(res2.data.status===200){
+      swal({
+        title: "Success",
+        text: "Student deleted sucessfully",
+        icon: "success",
+        button: "OK",
+      });
+  
+      this.setState({
+        students:res2.data.students,
+      })
+    }
+}
+
 
   render() {
 
@@ -36,23 +59,31 @@ async componentDidMount(){
     }
 
     else{
+      let i=0;
       student_htmlTable = (this.state.students).map((item)=>{
+        i++
+        
         return(
-          <tr>
-             <td>{item.id}</td>
+          <tr key={item.id}>
+             <td>{i}</td>
             <td>{item.name}</td>
             <td>{item.course}</td>
             <td>{item.email}</td>
             <td>{item.phone}</td>
             <td>
-              <Link to={"edit-student/"+item.id.toString()} className='btn btn-success'>Edit</Link>
+              <Link to={"edit-student/"+item.id} className='btn btn-success'>Edit</Link>
             </td>
             <td>
-                <button className='btn btn-danger' >Delete</button>
+              <form className='d-inline' onSubmit={(e)=>this.delete(e,item.id)} ><button className='btn btn-danger'  >Delete</button></form>
+                
             </td>
           </tr>
         )
+        
+        
       })
+
+     
 
     }
     return (
@@ -60,7 +91,7 @@ async componentDidMount(){
     
         <div className='container'>
             <div className='row'>
-                <div className='col-sm-12'>
+                <div className='col-mm-12'>
                     <div className = 'card'> 
                         <div className = 'card-header'> 
                             <h4>
@@ -70,7 +101,6 @@ async componentDidMount(){
                             </h4>
                         </div>
                         <div className='card-body'>
-
                           <table className='table coltable-bordered table-striped'>
                             <thead>
                               <tr>
