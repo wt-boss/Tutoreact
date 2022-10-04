@@ -1,21 +1,17 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useContext, useState } from 'react'
 import Product from './Product'
 import ProductsCathegories from './ProductsCathegories'
+import {ProductsContext} from  '../App'
 
-export default function ProductsTable({products}) {
+export default function ProductsTable() {
 
-    const produits = [...products]
-
-     const allCathegories =(produits).map((produit)=>produit.category)
-     const cathegories=[...new Set(allCathegories)]
-    
-    
-   
-    
-    console.log(cathegories)
-
-    const cathegoriesProduits = (cathegories).map((cathegorie)=>
-    <ProductsCathegories produits={produits} name ={cathegorie}/>
+  const productsBd = useContext(ProductsContext) ;
+            const  produits=[...productsBd] ;
+            const allCathegories =(produits).map((produit)=>produit.category); 
+            const cathegories=[...new Set(allCathegories)] ;
+         
+  const cathegoriesProduits = (cathegories).map((cathegorie)=>
+    <ProductsCathegories  name ={cathegorie}/>
     
     )
 

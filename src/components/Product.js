@@ -1,14 +1,14 @@
 
-import React from 'react'
+import React, { useContext } from 'react'
 import ProducsItem from './ProducsItem';
+import { ProductsContext } from '../App'
 
-export default function product({produits , name}) {
 
-  const filterProduct = (nameCategory) => {
-    produits.filter ((nameCategory) => !nameCategory);
-    return true;
-  }
+export default function product({ name}) {
 
+  const produits  = useContext(ProductsContext); 
+
+  
   const belongTo =(cathegoryName)=>{
       if(cathegoryName==name){
         return true
